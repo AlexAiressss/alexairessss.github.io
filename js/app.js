@@ -83,7 +83,7 @@ function curriculo() {
   </div></div></section>
   <section id="contato"><div class="wrap contact"><h2>Vamos conversar sobre crescimento?</h2>
     <a class="big" href="mailto:${S.email}">${esc(S.email)}</a>
-    <div class="row"><a class="btn primary" href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio">Enviar e-mail</a><a class="btn" href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a><a class="btn" href="${S.pdf}" download>Baixar PDF</a></div>
+    <div class="row"><a class="btn primary" href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio">Enviar e-mail</a><a class="btn" href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a></div>
   </div></section>`;
 }
 
