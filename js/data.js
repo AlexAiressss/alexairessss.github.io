@@ -9,7 +9,7 @@ window.SITE = {
   resumo: "Profissional de Produto com mais de 15 anos de experiência em produtos digitais, growth, analytics e monetização, com passagem por Globo e Oi. Conecto estratégia de produto, comportamento do usuário e objetivos de negócio para identificar oportunidades, orientar prioridades e impulsionar resultados.",
   historia: {
     titulo: "De atrair usuários a construir produtos que geram valor.",
-    subtitulo: "Uma trajetória que conecta marketing digital, dados, growth, monetização e estratégia de produto.",
+    subtitulo: "Mais de 15 anos de experiência em uma trajetória que conecta marketing digital, dados, growth, monetização e estratégia de produto.",
     capitulos: [
       { n: "01", icone: "alvo", titulo: "Marketing Digital & Aquisição", tag: "O começo da jornada",
         destaques: ["Google Ads e mídia digital", "Performance e aquisição de usuários", "Campanhas, conversão e comportamento de audiência"],
@@ -40,10 +40,6 @@ window.SITE = {
   telefone: "21-983822720",
   linkedin: "https://www.linkedin.com/in/alxaires/",
   pdf: "assets/docs/curriculo-alex-fernandes.pdf",
-  destaques: [
-    { n: "15+", t: "anos de experiência" },
-    { n: "R$30MM+", t: "em receita via patrocínios e formatos (Globo)" }
-  ],
   empresas: ["Globo", "Oi", "África", "Almap BBDO"],
   especialidades: [
     "Estratégia de produto, roadmap e priorização",

@@ -66,7 +66,6 @@ function curriculo() {
     <p class="cargo">${esc(S.cargo)}</p>
     <p class="story-title">${esc(S.historia.titulo)}</p>
     <p class="lead">${esc(S.historia.subtitulo)}</p>
-    <div class="stats">${S.destaques.map(d => `<div><b>${esc(d.n)}</b><span>${esc(d.t)}</span></div>`).join("")}</div>
     <div class="chips"><span>Passagens por</span>${S.empresas.map(e => `<span class="chip">${esc(e)}</span>`).join("")}</div>
   </div></section>
   ${story()}
