@@ -1,8 +1,20 @@
 /* Roteador simples por hash: #/curriculo · #/cases · #/cases/<id> */
-const S = window.SITE, C = window.CASES, app = document.getElementById("app");
+const BASE = window.SITE, C = window.CASES, app = document.getElementById("app");
+/* Idiomas: PT é o conteúdo original (SITE); EN é a tradução (SITE_EN) aplicada sobre a mesma estrutura. */
+function buildEn() {
+  const E = window.SITE_EN || {}, en = Object.assign({}, BASE, E);
+  en.experiencia = BASE.experiencia.map((e, i) => Object.assign({}, e, (E.experiencia || [])[i]));
+  en.historia = Object.assign({}, BASE.historia, E.historia, { capitulos: BASE.historia.capitulos.map((c, i) => Object.assign({}, c, ((E.historia || {}).capitulos || [])[i])) });
+  const keys = E.ferramentasKeys || [];
+  en.ferramentas = Object.fromEntries(Object.entries(BASE.ferramentas).map(([k, v], i) => [keys[i] || k, v]));
+  return en;
+}
+const LANGS = { pt: BASE, en: buildEn() };
+let lang = "pt"; try { lang = localStorage.getItem("lang") === "en" ? "en" : "pt"; } catch (e) {}
+let S = LANGS[lang], U = window.I18N[lang];
 const CATS = ["Produto", "Growth", "Dados", "Estratégia", "Monetização"];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const GEO = `<svg viewBox="0 0 400 400" fill="none" stroke="#4f86ff" stroke-width="1" aria-hidden="true"><circle cx="200" cy="200" r="190" opacity=".25"/><circle cx="200" cy="200" r="130" opacity=".35"/><circle cx="200" cy="200" r="70" opacity=".5"/><path d="M10 200h380M200 10v380M66 66l268 268M334 66L66 334" opacity=".18"/><rect x="130" y="130" width="140" height="140" rx="6" opacity=".4"/></svg>`;
+const GEO = `<svg viewBox="0 0 400 400" fill="none" stroke="#8fb0d9" stroke-width="1" aria-hidden="true"><circle cx="200" cy="200" r="190" opacity=".25"/><circle cx="200" cy="200" r="130" opacity=".35"/><circle cx="200" cy="200" r="70" opacity=".5"/><path d="M10 200h380M200 10v380M66 66l268 268M334 66L66 334" opacity=".18"/><rect x="130" y="130" width="140" height="140" rx="6" opacity=".4"/></svg>`;
 const todo = v => (v && v.length) ? v : null;
 const txt = v => v ? `<p>${esc(v)}</p>` : `<p class="todo">A preencher.</p>`;
 
@@ -10,24 +22,24 @@ const txt = v => v ? `<p>${esc(v)}</p>` : `<p class="todo">A preencher.</p>`;
 
 function heroArt() {
   const bars = [60,95,80,130,110,165,140,190,170,225,200,250,225,280].map((v, i) => `<rect class="bar" style="animation-delay:${i * 90}ms" x="${60 + i * 78}" y="${520 - v}" width="38" height="${v}" rx="6"/>`).join("");
-  const nodes = [[170,330],[330,270],[520,300],[690,190],[860,215],[1030,120],[1150,80]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="7" fill="#9bbcff"/><circle class="pulse" style="animation-delay:${i * 420}ms" cx="${x}" cy="${y}" r="18" stroke="#4f86ff" stroke-opacity=".7"/>`).join("");
+  const nodes = [[170,330],[330,270],[520,300],[690,190],[860,215],[1030,120],[1150,80]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="7" fill="#b9d0ec"/><circle class="pulse" style="animation-delay:${i * 420}ms" cx="${x}" cy="${y}" r="18" stroke="#8fb0d9" stroke-opacity=".7"/>`).join("");
   const P = "M0 400 C120 380 150 340 170 330 S300 290 330 270 S480 320 520 300 S650 210 690 190 S820 240 860 215 S990 140 1030 120 S1120 95 1150 80 L1200 70";
   return `<svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMin slice" fill="none" aria-hidden="true">
     <defs>
-      <linearGradient id="ha" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f86ff" stop-opacity=".35"/><stop offset="1" stop-color="#4f86ff" stop-opacity="0"/></linearGradient>
-      <linearGradient id="hb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f6bff" stop-opacity=".2"/><stop offset="1" stop-color="#9bbcff" stop-opacity=".9"/></linearGradient>
-      <linearGradient id="hs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4f86ff" stop-opacity="0"/><stop offset=".5" stop-color="#9bbcff" stop-opacity=".28"/><stop offset="1" stop-color="#4f86ff" stop-opacity="0"/></linearGradient>
-      <radialGradient id="hg"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#7aa2ff" stop-opacity=".8"/><stop offset="1" stop-color="#2f6bff" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ha" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb0d9" stop-opacity=".35"/><stop offset="1" stop-color="#8fb0d9" stop-opacity="0"/></linearGradient>
+      <linearGradient id="hb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b5b8c" stop-opacity=".2"/><stop offset="1" stop-color="#b9d0ec" stop-opacity=".9"/></linearGradient>
+      <linearGradient id="hs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8fb0d9" stop-opacity="0"/><stop offset=".5" stop-color="#b9d0ec" stop-opacity=".28"/><stop offset="1" stop-color="#8fb0d9" stop-opacity="0"/></linearGradient>
+      <radialGradient id="hg"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#a3c1e6" stop-opacity=".8"/><stop offset="1" stop-color="#3b5b8c" stop-opacity="0"/></radialGradient>
     </defs>
-    <g stroke="#4f86ff" stroke-opacity=".12">${[100,200,300,400,500].map(y => `<path d="M0 ${y}H1200"/>`).join("")}${[200,400,600,800,1000].map(x => `<path d="M${x} 0V600"/>`).join("")}</g>
+    <g stroke="#8fb0d9" stroke-opacity=".12">${[100,200,300,400,500].map(y => `<path d="M0 ${y}H1200"/>`).join("")}${[200,400,600,800,1000].map(x => `<path d="M${x} 0V600"/>`).join("")}</g>
     <rect class="sweep" x="-300" y="0" width="300" height="600" fill="url(#hs)"/>
-    <g fill="#4f86ff" fill-opacity=".16">${bars}</g>
+    <g fill="#8fb0d9" fill-opacity=".16">${bars}</g>
     <path d="${P} V600 H0Z" fill="url(#ha)"/>
     <path id="lp" class="ln" d="${P}" stroke="url(#hb)" stroke-width="3" stroke-linecap="round"/>
     ${nodes}
     <g class="trav"><circle r="26" fill="url(#hg)"><animateMotion dur="8s" begin="3s" repeatCount="indefinite"><mpath href="#lp"/></animateMotion></circle></g>
-    <circle class="spin" cx="980" cy="330" r="170" stroke="#7aa2ff" stroke-opacity=".35" stroke-dasharray="3 12"/>
-    <circle class="spin r" cx="980" cy="330" r="100" stroke="#4f86ff" stroke-opacity=".4" stroke-dasharray="40 14"/>
+    <circle class="spin" cx="980" cy="330" r="170" stroke="#a3c1e6" stroke-opacity=".35" stroke-dasharray="3 12"/>
+    <circle class="spin r" cx="980" cy="330" r="100" stroke="#8fb0d9" stroke-opacity=".4" stroke-dasharray="40 14"/>
   </svg>`;
 }
 
@@ -43,12 +55,12 @@ function story() {
   const caps = H.capitulos.map(c => `
     <article class="chap rv">
       <div class="chap-h"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[c.icone]}</svg></span>
-        <div><span class="cn">Capítulo ${c.n}</span><h3>${esc(c.titulo)}</h3><span class="ctag">${esc(c.tag)}</span></div></div>
+        <div><span class="cn">${U.chapter} ${c.n}</span><h3>${esc(c.titulo)}</h3><span class="ctag">${esc(c.tag)}</span></div></div>
       <div class="tags">${c.destaques.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
       ${c.resultados ? `<div class="res">${c.resultados.map(r => `<div class="rs"><b>${esc(r.n)}</b><span>${esc(r.t)}</span></div>`).join("")}</div>` : ""}
       <p class="msg">${esc(c.msg)}</p>
     </article>`).join("");
-  return `<section id="trajetoria"><div class="wrap"><h2>Minha trajetória em cinco capítulos</h2>
+  return `<section id="trajetoria"><div class="wrap"><h2>${U.h2story}</h2>
     <div class="story">${caps}</div>
     <div class="concl rv"><p class="cq">${esc(H.conclusao.frase)}</p><p class="muted">${esc(H.conclusao.complemento)}</p></div></div></section>`;
 }
@@ -57,7 +69,7 @@ function curriculo() {
   const ex = S.experiencia.map((e, i) => `
     <article class="tl rv ${i === 0 ? "open" : ""}">
       <button aria-expanded="${i === 0}"><div class="eh">${e.logo ? `<img class="elogo${e.logoWide ? " wide" : ""}" src="${e.logo}" alt="">` : ""}<div><h3>${esc(e.empresa)}</h3><div class="cg">${esc(e.cargo)}</div></div></div><span class="per">${esc(e.periodo)}</span></button>
-      <div class="body">${(e.cases || []).length ? `<div class="cchips">${e.cases.map(id => { const k = C.find(x => x.id === id); return k ? `<a class="chip casechip" href="${k.pdf}" target="_blank" rel="noopener">Case: ${esc(k.titulo)} →</a>` : ""; }).join("")}</div>` : ""}<ul class="list">${e.itens.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+      <div class="body">${(e.cases || []).length ? `<div class="cchips">${e.cases.map(id => { const k = C.find(x => x.id === id); return k ? `<a class="chip casechip" href="${k.pdf}" target="_blank" rel="noopener">${U.caseLbl}: ${esc(k.titulo)} →</a>` : ""; }).join("")}</div>` : ""}<ul class="list">${e.itens.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
     </article>`).join("");
   const tools = Object.entries(S.ferramentas).map(([k, v]) => `<div class="tgroup"><h4>${esc(k)}</h4><div class="tags">${v.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div></div>`).join("");
   return `
@@ -66,34 +78,34 @@ function curriculo() {
     <p class="cargo">${esc(S.cargo)}</p>
     <p class="story-title">${esc(S.historia.titulo)}</p>
     <p class="lead">${esc(S.historia.subtitulo)}</p>
-    <div class="chips"><span>Passagens por</span>${S.empresas.map(e => `<span class="chip">${esc(e)}</span>`).join("")}</div>
+    <div class="chips"><span>${U.passed}</span>${S.empresas.map(e => `<span class="chip">${esc(e)}</span>`).join("")}</div>
   </div></section>
   ${story()}
-  <section id="resumo"><div class="wrap"><h2>Dados, produto e receita: uma trajetória orientada a resultado</h2><div class="cols">
-    <div>${S.resumoLongo.map(p => `<p class="rv" style="margin-bottom:14px">${esc(p)}</p>`).join("")}<h3 style="margin:30px 0 14px">Especialidades</h3><ul class="list rv">${S.especialidades.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
-    <div><h3 style="margin-bottom:14px">Diferenciais</h3><ul class="list rv">${S.diferenciais.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+  <section id="resumo"><div class="wrap"><h2>${U.h2resumo}</h2><div class="cols">
+    <div>${S.resumoLongo.map(p => `<p class="rv" style="margin-bottom:14px">${esc(p)}</p>`).join("")}<h3 style="margin:30px 0 14px">${U.specs}</h3><ul class="list rv">${S.especialidades.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+    <div><h3 style="margin-bottom:14px">${U.diffs}</h3><ul class="list rv">${S.diferenciais.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
   </div></div></section>
-  <section id="experiencia"><div class="wrap"><h2>Onde gerei impacto: da análise à decisão de negócio</h2><div class="timeline">${ex}</div></div></section>
-  <section id="competencias"><div class="wrap"><h2>Competências que transformam dados em crescimento</h2><div class="grid">${S.competencias.map(c => `<div class="card rv"><h4>${esc(c[0])}</h4><p>${esc(c[1])}</p></div>`).join("")}</div></div></section>
-  <section id="ferramentas"><div class="wrap"><h2>O stack por trás de cada decisão estratégica</h2><div class="tools rv">${tools}</div></div></section>
-  <section id="formacao"><div class="wrap"><h2>Formação acadêmica e idiomas</h2><div class="cols">
+  <section id="experiencia"><div class="wrap"><h2>${U.h2exp}</h2><div class="timeline">${ex}</div></div></section>
+  <section id="competencias"><div class="wrap"><h2>${U.h2skills}</h2><div class="grid">${S.competencias.map(c => `<div class="card rv"><h4>${esc(c[0])}</h4><p>${esc(c[1])}</p></div>`).join("")}</div></div></section>
+  <section id="ferramentas"><div class="wrap"><h2>${U.h2tools}</h2><div class="tools rv">${tools}</div></div></section>
+  <section id="formacao"><div class="wrap"><h2>${U.h2edu}</h2><div class="cols">
     <div class="grid" style="grid-template-columns:1fr">${S.formacao.map(f => `<div class="card rv"><h4>${esc(f.t)}</h4><p>${esc(f.i)}${f.s ? " · " + esc(f.s) : ""}</p></div>`).join("")}</div>
     <div class="grid" style="grid-template-columns:1fr">${S.idiomas.map(f => `<div class="card rv"><h4>${esc(f[0])}</h4><p>${esc(f[1])}</p></div>`).join("")}</div>
   </div></div></section>
-  <section id="contato"><div class="wrap contact"><h2>Vamos conversar sobre crescimento?</h2>
+  <section id="contato"><div class="wrap contact"><h2>${U.h2contact}</h2>
     <a class="big" href="mailto:${S.email}">${esc(S.email)}</a>
-    <div class="row"><a class="btn primary" href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio">Enviar e-mail</a><a class="btn" href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="row"><a class="btn primary" href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio">${U.send}</a><a class="btn" href="${S.linkedin}" target="_blank" rel="noopener">LinkedIn</a></div>
   </div></section>`;
 }
 
 function card(c) {
-  return `<a class="case mini rv" href="${c.pdf}" target="_blank" rel="noopener" aria-label="Acessar case ${esc(c.titulo)}">
-    <h3>${esc(c.titulo)}</h3><span class="go">Acessar case <i>→</i></span></a>`;
+  return `<a class="case mini rv" href="${c.pdf}" target="_blank" rel="noopener" aria-label="${U.openCase} ${esc(c.titulo)}">
+    <h3>${esc(c.titulo)}</h3><span class="go">${U.openCase} <i>→</i></span></a>`;
 }
 
 function cases() {
-  app.innerHTML = `<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(34px,6vw,68px)">Cases de impacto em produto, growth e monetização</h1>
-    <p>Projetos onde estratégia, dados e produto viraram resultado.</p></div>
+  app.innerHTML = `<div class="wrap"><div class="page-head"><h1 style="font-size:clamp(34px,6vw,68px)">${U.casesTitle}</h1>
+    <p>${U.casesSub}</p></div>
     <div class="cases mini-grid" style="margin-top:34px">${C.map(card).join("")}</div></div>`;
 }
 
@@ -131,7 +143,24 @@ function reveal() {
   app.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = Math.min((i % 6) * 70, 350) + "ms"; io.observe(el); });
 }
 
-function route() {
+function sizeOpen() { app.querySelectorAll(".tl.open .body").forEach(b => { b.style.maxHeight = b.scrollHeight + "px"; }); }
+addEventListener("resize", sizeOpen);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeOpen);
+function applyChrome() {
+  document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+  document.getElementById("nav-cv").textContent = U.navCv;
+  document.getElementById("nav-cases").textContent = U.navCases;
+  document.getElementById("country").textContent = U.country;
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+}
+function setLang(l) {
+  lang = l; S = LANGS[l]; U = window.I18N[l];
+  try { localStorage.setItem("lang", l); } catch (e) {}
+  applyChrome(); route(true);
+}
+document.querySelectorAll(".lang button").forEach(b => { b.onclick = () => setLang(b.dataset.lang); });
+
+function route(keep) {
   const parts = (location.hash || "#/curriculo").replace("#/", "").split("/");
   const page = parts[0] || "curriculo";
   document.querySelectorAll(".menu a").forEach(a => a.classList.toggle("on", a.dataset.route === page));
@@ -139,12 +168,13 @@ function route() {
   else {
     app.innerHTML = curriculo();
     app.querySelectorAll(".tl button").forEach(b => b.onclick = () => {
-      const t = b.parentElement, o = t.classList.toggle("open"); b.setAttribute("aria-expanded", o);
+      const t = b.parentElement, o = t.classList.toggle("open"), bd = t.querySelector(".body"); b.setAttribute("aria-expanded", o); bd.style.maxHeight = o ? bd.scrollHeight + "px" : "";
     });
     app.querySelectorAll("[data-scroll]").forEach(b => b.onclick = () => document.getElementById(b.dataset.scroll).scrollIntoView({ behavior: "smooth" }));
   }
-  window.scrollTo(0, 0); reveal(); closeMenu(); counters();
-  document.title = page === "cases" ? "Cases — " + S.nome : S.nome + " — Produto, Growth e Monetização";
+  if (!keep) { window.scrollTo(0, 0); app.classList.remove("pg"); void app.offsetWidth; app.classList.add("pg"); }
+  reveal(); closeMenu(); counters(); sizeOpen();
+  document.title = page === "cases" ? U.navCases + " — " + S.nome : S.nome + " — " + U.docTitle;
 }
 
 
@@ -185,5 +215,6 @@ function closeMenu() { menu.classList.remove("open"); burger.setAttribute("aria-
 burger.onclick = () => burger.setAttribute("aria-expanded", menu.classList.toggle("open"));
 document.getElementById("lnk").href = S.linkedin;
 document.getElementById("year").textContent = new Date().getFullYear();
-window.addEventListener("hashchange", route);
+window.addEventListener("hashchange", () => route());
+applyChrome();
 route();
