@@ -15,16 +15,17 @@
 <div id="prog"></div>
 <header class="nav" id="nav">
   <div class="actions">
+    <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true" title="Português">PT</button><button type="button" data-lang="en" aria-pressed="false" title="English">EN</button></div>
     <a class="ibtn" id="lnk" href="#" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2 3.74-2 4 0 4.9 2.6 4.9 6V21h-4v-4.9c0-1.2 0-2.7-1.7-2.7s-1.9 1.3-1.9 2.6V21h-4z"/></svg></a>
   </div>
   <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
   <nav class="menu" id="menu">
-    <a href="#/curriculo" data-route="curriculo">Currículo</a>
-    <a href="#/cases" data-route="cases">Cases</a>
+    <a href="#/curriculo" data-route="curriculo" id="nav-cv">Currículo</a>
+    <a href="#/cases" data-route="cases" id="nav-cases">Cases</a>
   </nav>
 </header>
 <main id="app" tabindex="-1"></main>
-<footer class="foot">© <span id="year"></span> Alex Fernandes · Brasil</footer>
+<footer class="foot">© <span id="year"></span> Alex Fernandes · <span id="country">Brasil</span></footer>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 </body>
