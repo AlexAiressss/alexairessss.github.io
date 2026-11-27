@@ -258,13 +258,13 @@ window.I18N = {
     h2story: "Minha trajetória em cinco capítulos", h2resumo: "Dados, produto e receita: uma trajetória orientada a resultado",
     h2exp: "Onde gerei impacto: da análise à decisão de negócio", h2skills: "Competências que transformam dados em crescimento",
     h2tools: "O stack por trás de cada decisão estratégica", h2edu: "Formação acadêmica e idiomas", h2contact: "Aberto a novas oportunidades, vamos conversar?",
-    specs: "Especialidades", diffs: "Diferenciais", send: "Enviar e-mail",
+    specs: "Especialidades", diffs: "Diferenciais", send: "Falar por e-mail", connect: "Conectar",
     casesTitle: "Cases de impacto em produto, growth e monetização", casesSub: "Projetos onde estratégia, dados e produto viraram resultado." },
   en: { navCv: "Resume", navCases: "Cases", country: "Brazil", docTitle: "Product, Growth and Monetization",
     passed: "Experience at", chapter: "Chapter", caseLbl: "Case", openCase: "Open case",
     h2story: "My career in five chapters", h2resumo: "Data, product and revenue: a results-driven career",
     h2exp: "Where I made an impact: from analysis to business decisions", h2skills: "Skills that turn data into growth",
     h2tools: "The stack behind every strategic decision", h2edu: "Education and languages", h2contact: "Open to new opportunities, let's talk?",
-    specs: "Specialties", diffs: "Differentiators", send: "Send email",
+    specs: "Specialties", diffs: "Differentiators", send: "Send email", connect: "Connect",
     casesTitle: "Impact cases in product, growth and monetization", casesSub: "Projects where strategy, data and product turned into results." }
 };

@@ -94,7 +94,7 @@ function curriculo() {
   </div></div></section>
   <section id="contato"><div class="wrap contact"><h2>${U.h2contact}</h2>
     <a class="big" href="mailto:${S.email}">${esc(S.email)}</a>
-    <div class="cta"><a href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg><span>${U.send}</span></a><a href="${S.linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2 3.74-2 4 0 4.9 2.6 4.9 6V21h-4v-4.9c0-1.2 0-2.7-1.7-2.7s-1.9 1.3-1.9 2.6V21h-4z"/></svg><span>${U.connect}</span></a></div>
+    <div class="cta"><a href="mailto:${S.email}?subject=Contato%20pelo%20portf%C3%B3lio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg><span>${U.send}</span></a><a href="${S.linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2 3.74-2 4 0 4.9 2.6 4.9 6V21h-4v-4.9c0-1.2 0-2.7-1.7-2.7s-1.9 1.3-1.9 2.6V21h-4z"/></svg><span>${U.connect || (lang === "en" ? "Connect" : "Conectar")}</span></a></div>
   </div></section>`;
 }
 
